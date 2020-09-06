@@ -4,8 +4,6 @@ const wss = new Ws.Server({ port: 8080 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
+    ws.send(`Received: ${message} at ${new Date().toISOString()}`);
   });
-
-  ws.send('something');
 });
