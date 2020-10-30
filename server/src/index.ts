@@ -1,13 +1,13 @@
-const Ws = require("ws");
+import Ws from "ws";
 
 const wss = new Ws.Server({ port: 8080 });
 
 const connections = [];
 
-wss.on("connection", function connection(ws) {
+wss.on("connection", (ws): void => {
   connections.push(ws);
-  ws.on("message", function incoming(message) {
-    connections.forEach((connection) => {
+  ws.on("message", (message): void => {
+    connections.forEach((connection: Ws) => {
       connection.send(`Received: ${message} at ${new Date().toISOString()}`);
     });
   });
